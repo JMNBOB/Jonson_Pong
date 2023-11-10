@@ -1,0 +1,153 @@
+[gd_scene load_steps=13 format=3 uid="uid://da62n4c2jotiq"]
+
+[ext_resource type="Script" path="res://Logic/Paddle.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://cukq68pakumgt" path="res://paddle.png" id="2"]
+[ext_resource type="Script" path="res://Logic/LeftWall.cs" id="3"]
+[ext_resource type="Script" path="res://Logic/Ball.cs" id="4"]
+[ext_resource type="Texture2D" uid="uid://dv0huiwb7qhti" path="res://ball.png" id="5"]
+[ext_resource type="Script" path="res://Logic/RightWall.cs" id="7"]
+[ext_resource type="Texture2D" uid="uid://bhm3r3w757iuy" path="res://Background.png" id="7_sfdr8"]
+[ext_resource type="Script" path="res://Logic/CeilingFloor.cs" id="8"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(13, 24.6479)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(25.5, 24.876)
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(320, 10)
+
+[node name="Pong" type="Node2D"]
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(99, 199)
+scale = Vector2(1, 0.6)
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(4, 4.16667)
+scale = Vector2(0.333333, 0.287115)
+texture = ExtResource("2")
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+position = Vector2(4.5, 5)
+scale = Vector2(1, 2.84)
+shape = SubResource("1")
+
+[node name="Opponent" type="Area2D" parent="."]
+position = Vector2(536, 200)
+scale = Vector2(1, 0.56)
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Opponent"]
+position = Vector2(1.00001, -1.78574)
+scale = Vector2(0.333333, 0.30012)
+texture = ExtResource("2")
+
+[node name="Collision" type="CollisionShape2D" parent="Opponent"]
+position = Vector2(1.185, -0.919006)
+scale = Vector2(1, 2.88)
+shape = SubResource("1")
+
+[node name="Ball" type="Area2D" parent="."]
+modulate = Color(0.819608, 0.901961, 0.0901961, 1)
+position = Vector2(320.5, 191.124)
+script = ExtResource("4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+position = Vector2(12.5, 12.376)
+scale = Vector2(0.0148827, 0.0141323)
+texture = ExtResource("5")
+
+[node name="Collision" type="CollisionShape2D" parent="Ball"]
+position = Vector2(12.5, 12.876)
+shape = SubResource("2")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="LeftWall" type="Area2D" parent="."]
+position = Vector2(-10, 200)
+script = ExtResource("3")
+
+[node name="Collision" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("3")
+
+[node name="DifficultyPlayer" type="Label" parent="LeftWall"]
+offset_left = 463.0
+offset_top = 179.0
+offset_right = 552.0
+offset_bottom = 193.0
+text = "Easy"
+horizontal_alignment = 1
+
+[node name="PlayerScore" type="Label" parent="LeftWall"]
+offset_left = 456.0
+offset_top = -186.0
+offset_right = 554.0
+offset_bottom = -172.0
+text = "P2 Score:"
+horizontal_alignment = 1
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2(650, 200)
+script = ExtResource("7")
+
+[node name="Collision" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("3")
+
+[node name="EnemyScore" type="Label" parent="RightWall"]
+offset_left = -545.0
+offset_top = -186.0
+offset_right = -447.0
+offset_bottom = -160.0
+text = "P1 Score:"
+horizontal_alignment = 1
+
+[node name="DifficultyEnemy" type="Label" parent="RightWall"]
+offset_left = -540.0
+offset_top = 180.0
+offset_right = -451.0
+offset_bottom = 194.0
+text = "Easy"
+horizontal_alignment = 1
+
+[node name="Ceiling" type="Area2D" parent="."]
+position = Vector2(320, -10)
+script = ExtResource("8")
+
+[node name="Collision" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("4")
+
+[node name="Goal" type="Label" parent="."]
+offset_left = 232.0
+offset_top = 198.0
+offset_right = 413.0
+offset_bottom = 224.0
+text = "Get a score of 50 to win"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Goal"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Goal/ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Goal/ParallaxBackground/ParallaxLayer"]
+position = Vector2(321, 212)
+scale = Vector2(0.157, 0.1576)
+texture = ExtResource("7_sfdr8")
+
+[node name="Floor" type="Area2D" parent="Goal/ParallaxBackground"]
+position = Vector2(320, 410)
+script = ExtResource("8")
+
+[node name="Collision" type="CollisionShape2D" parent="Goal/ParallaxBackground/Floor"]
+shape = SubResource("4")
+
+[connection signal="area_entered" from="Player" to="Player" method="OnAreaEntered"]
+[connection signal="area_entered" from="Opponent" to="Opponent" method="OnAreaEntered"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="OnWallAreaEntered"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="OnWallAreaEntered"]
+[connection signal="area_entered" from="Ceiling" to="Ceiling" method="OnAreaEntered"]
+[connection signal="area_entered" from="Goal/ParallaxBackground/Floor" to="Goal/ParallaxBackground/Floor" method="OnAreaEntered"]

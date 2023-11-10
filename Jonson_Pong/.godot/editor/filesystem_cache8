@@ -1,0 +1,13 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1699628839
+Background.png::CompressedTexture2D::2904247062636681792::1699619416::1699619468::1::::<><>::
+ball.png::CompressedTexture2D::8685298400418274890::1699622479::1699622481::1::::<><>::
+paddle.png::CompressedTexture2D::6198290605639547279::1699620315::1699620316::1::::<><>::
+pong.tscn::PackedScene::7224921863086733388::1699628282::0::1::::<><>::res://Logic/Paddle.cs<>uid://cukq68pakumgt::::res://paddle.png<>res://Logic/LeftWall.cs<>res://Logic/Ball.cs<>uid://dv0huiwb7qhti::::res://ball.png<>res://Logic/RightWall.cs<>uid://bhm3r3w757iuy::::res://Background.png<>res://Logic/CeilingFloor.cs
+::res://Logic/::1699626418
+Ball.cs::CSharpScript::-1::1699616197::0::1::::<><>::
+CeilingFloor.cs::CSharpScript::-1::1699616197::0::1::::<><>::
+LeftWall.cs::CSharpScript::-1::1699616197::0::1::::<><>::
+Paddle.cs::CSharpScript::-1::1699626418::0::1::::<><>::
+RightWall.cs::CSharpScript::-1::1699616197::0::1::::<><>::
+Wall.cs::CSharpScript::-1::1699616197::0::1::::<><>::
